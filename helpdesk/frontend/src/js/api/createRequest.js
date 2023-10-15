@@ -18,12 +18,18 @@ module.exports = async (options) => {
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
         headers: {
-          "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
+          "Content-Type": "application/json"
         },
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
     })
+
+
+    if(options.body.method.includes('deleteById')) {
+      options.callback();
+      return;
+    }
+    
     const resp = await response.json();
     console.log('RESP: '+ JSON.stringify(resp));
     options.callback(resp);
@@ -42,17 +48,23 @@ module.exports = async (options) => {
         url += (key + '=' + options.body[key] + '&');
       }
     };
+
+    // convert formData into object
+    const data = {};
+    const optdata = options.data
+    optdata.forEach((value, key) => {
+      data[key] = value;
+    });
        
     try {
       const response = await fetch(url, {
         method: options.method,
-        body: JSON.stringify(options.data), // *GET, POST, PUT, DELETE, etc.
+        body: JSON.stringify(data), // *GET, POST, PUT, DELETE, etc.
         mode: "cors", // no-cors, *cors, same-origin
         cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
         credentials: "same-origin", // include, *same-origin, omit
         headers: {
           "Content-Type": "application/json",
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         redirect: "follow", // manual, *follow, error
         referrerPolicy: "no-referrer", // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url

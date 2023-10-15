@@ -11,24 +11,20 @@ export default class TicketService {
       url: '',
       method: 'GET',
       body: {method: 'allTickets'},
-      callback: (response) => {        
-        const table = document.createElement('ul');
-        table.classList.add('table');
-        const bodyContent = document.querySelector('.container');
-        bodyContent.appendChild(table);
-        response.forEach(ticket => {
-          const ticketView = new TicketView(ticket);
-          const ticketLine = ticketView.generateView();
-          table.appendChild(ticketLine);          
-          
-        })
-      }
+      callback: callback
     }
 
     createRequest(options);
   }
 
   get(id, callback) {
+    const options = {
+      url: '',
+      method: 'GET',
+      body: {method: 'ticketById', id: id},
+      callback: callback
+    }
+    createRequest(options);
   }
 
   create(data, callback) {
@@ -40,9 +36,19 @@ export default class TicketService {
       callback: callback
     }
     createRequest(options);
+    const modal = document.querySelector('.modal');
+    modal.remove();
   }
 
   update(id, data, callback) {}
 
-  delete(id, callback) {}
+  delete(id, callback) {
+    const options = {
+      body: {method: 'deleteById', id: id},
+      method: 'GET',
+      url: '',
+      callback: callback
+    }
+    createRequest(options);
+  }
 }

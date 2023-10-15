@@ -15,14 +15,6 @@ app.use(
 );
 app.use((req, res, next) => {
   
-
-  //req.response.set('Access-Control-Allow-Origin', '*');
-
- // req.response.set('Access-Control-Allow-Methods', 'DELETE, PUT, PATCH, GET, POST');
-
- // req.response.status = 204;
-
-
   res.setHeader('Content-Type', 'application/json');
   next();
 });
@@ -72,6 +64,7 @@ app.use(async (request, response) => {
     case "createTicket": {
       try {
         const createData = request.body;
+        //console.log('BODY:'+ JSON.stringify(request.body));
         const newTicket = {
           id: crypto.randomUUID(),
           name: createData.name,
@@ -80,8 +73,10 @@ app.use(async (request, response) => {
           created: Date.now(),
         };
         tickets.push(newTicket);
+        //console.log('NUMBER OF TICKETS: '+tickets.length);
         response.send(JSON.stringify(newTicket)).end();
       } catch (error) {
+        //console.log('TROUBLE: '+error.message);
         response.status(500).send(JSON.stringify({ error: error.message }));
       }
       break;

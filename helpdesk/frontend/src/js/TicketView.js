@@ -22,19 +22,35 @@ export default class TicketView {
     const ticketDate = document.createElement('p');
     ticketDate.classList.add('ticket_date');
     ticketDate.textContent = this.ticket.created;
+
+    const ticketName = document.createElement('p');
+    ticketName.classList.add('ticket_name');
+    ticketName.textContent = this.ticket.name;
+
     const ticketDescr = document.createElement('p');
-    ticketDescr.classList.add('ticket_name');
-    ticketDescr.textContent = this.ticket.name;
+    ticketDescr.classList.add('ticket_description');
+    
     const editBtn = document.createElement('button');
     editBtn.classList.add('ticket_edit');
-    const delBtn = document.createElement('button');
-    editBtn.classList.add('ticket_delete');
 
-    ticketLine.appendChild(checkBox);
-    ticketLine.appendChild(ticketDescr);
-    ticketLine.appendChild(ticketDate);
-    ticketLine.appendChild(editBtn);
-    ticketLine.appendChild(delBtn);
+    const delBtn = document.createElement('button');
+    delBtn.classList.add('ticket_delete');
+
+    const ticketBody = document.createElement('div');
+    ticketBody.classList.add('ticket_body');
+    
+    const ticketBase = document.createElement('div');
+    ticketBase.classList.add('ticket_base');  
+
+    ticketBody.appendChild(checkBox);
+    ticketBody.appendChild(ticketName);
+    ticketBody.appendChild(ticketDate);
+    ticketBody.appendChild(editBtn);
+    ticketBody.appendChild(delBtn);
+
+    ticketLine.appendChild(ticketBody);
+    ticketBase.appendChild(ticketDescr)
+    ticketLine.appendChild(ticketBase);
 
     return ticketLine;
   }
