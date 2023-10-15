@@ -1,6 +1,5 @@
 import TicketService from "./TicketService";
 import TicketForm from "./TicketForm";
-import TicketView from "./TicketView";
 
 /**
  *  Основной класс приложения
@@ -25,9 +24,9 @@ export default class HelpDesk {
     this.ticketService.list();
     this.addListeners();
   }
+  
   addListeners = () => {
     const createBtn = document.querySelector('.new_task');
-    console.log('create button: '+createBtn);
     createBtn.addEventListener('click', (e) => {
       e.preventDefault();
       const ticketForm = new TicketForm();
@@ -37,9 +36,29 @@ export default class HelpDesk {
         const modal = document.querySelector('.modal');
         e.preventDefault();
         modal.remove();
-
+      });
+      const sendBtn = document.querySelector('.modal .create');
+      sendBtn.addEventListener('click', (e) => {
+        console.log('CREATE CLICKED');
+        e.preventDefault();
+        this.sendFormData();
       })
     })
+  }
+
+  sendFormData = () => {
+    console.log('SEND FORM STARTED')
+    const form = document.querySelector('#create_form');
+    const formData = new FormData(form);
+    const callback = (response) => {
+      if(response.status) {
+      console.log('CREATE RESPONSE: '+response);
+      }
+      
+    }
+    
+    this.ticketService.create(formData, callback);
+
   }
 
 }

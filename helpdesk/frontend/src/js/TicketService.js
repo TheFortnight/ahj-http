@@ -1,7 +1,6 @@
-import Ticket from './Ticket';
 import TicketView from './TicketView';
 import createRequest from './api/createRequest';
-import TicketForm from './TicketForm';
+
 /**
  *  Класс для связи с сервером.
  *  Содержит методы для отправки запросов на сервер и получения ответов
@@ -18,12 +17,10 @@ export default class TicketService {
         const bodyContent = document.querySelector('.container');
         bodyContent.appendChild(table);
         response.forEach(ticket => {
-          console.log('TICKET: '+JSON.stringify(ticket));
           const ticketView = new TicketView(ticket);
           const ticketLine = ticketView.generateView();
-          table.appendChild(ticketLine);
+          table.appendChild(ticketLine);          
           
-          //console.log('create button inside: '+container.innerHTML);
         })
       }
     }
@@ -32,11 +29,17 @@ export default class TicketService {
   }
 
   get(id, callback) {
-
   }
 
   create(data, callback) {
-
+    const options = {
+      data: data,
+      body: {method: 'createTicket'},
+      method: 'POST',
+      url: '',
+      callback: callback
+    }
+    createRequest(options);
   }
 
   update(id, data, callback) {}
