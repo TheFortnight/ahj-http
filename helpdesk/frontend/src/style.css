@@ -54,12 +54,30 @@
     cursor: pointer;
     width: 50px;
     border-radius: 50%;
-    background-color: red;
+    background-color: white;
+    background-image: url('./js/img/trash.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .ticket_edit {
     cursor: pointer;
     width: 50px;
     border-radius: 50%;
-    background-color: greenyellow
+    background-color: white;
+    background-image: url('./js/img/edit.jpeg');
+    background-size: contain;
+    background-repeat: no-repeat;
 }
+
+label {
+    border:1px solid #ccc;
+    padding:10px;
+    margin:0 0 10px;
+    display:block; 
+   }
+   
+   label:hover {
+    background:#eee;
+    cursor:pointer;
+   }

@@ -40,7 +40,18 @@ export default class TicketService {
     modal.remove();
   }
 
-  update(id, data, callback) {}
+  update(id, data, callback) {
+    const options = {
+      data: data,
+      body: {method: 'updateById', id: id},
+      method: 'POST',
+      url: '',
+      callback: callback
+    }
+    createRequest(options);
+    const modal = document.querySelector('.modal');
+    if (modal) modal.remove();
+  }
 
   delete(id, callback) {
     const options = {

@@ -32,12 +32,12 @@ export default class TicketForm {
   body.appendChild(this.modalCreate);
   }
 
-  openDetailedForm () {
+  openDetailedForm (element) {
     this.modalCreate = document.createElement('div');
     this.modalCreate.classList.add('dialog');
     this.modalCreate.innerHTML = `<div class="modal modal_create">
     <div class="header">
-    <p>Create New Ticket</p>
+    <p>${element.getAttribute('name')}</p>
     </div>
     <div class="body">
       <form id="create_form" class="form">

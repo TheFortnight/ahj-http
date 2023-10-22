@@ -12,13 +12,17 @@ export default class TicketView {
   }
 
   generateView(){
+    console.log('TICKET STATUS: '+this.ticket.status);
+    let stat;
+    if (this.ticket.status === true || this.ticket.status === 'true') stat = 'checked';
+    if (this.ticket.status === false || this.ticket.status === 'false') stat = 'unchecked';
     const ticketLine = document.createElement('li');
     ticketLine.classList.add('ticket');
     ticketLine.setAttribute('id', `${this.ticket.id}`);
     ticketLine.setAttribute('name', `${this.ticket.name}`)
-    const checkBox = document.createElement('input')
-    checkBox.setAttribute('type', 'checkbox');
-    checkBox.classList.add('ticket_checkbox');
+    const checkBox = document.createElement('div')
+    checkBox.innerHTML = `<label class='label'><input class='box' type="checkbox" value="value" ${stat}>BOX</label>`;
+    checkBox.classList.add('checkbox_container');
     const ticketDate = document.createElement('p');
     ticketDate.classList.add('ticket_date');
     ticketDate.textContent = this.ticket.created;

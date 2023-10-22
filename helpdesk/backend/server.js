@@ -97,6 +97,7 @@ app.use(async (request, response) => {
     case "updateById": {
       const ticket = tickets.find((ticket) => ticket.id === id);
       const updateData = request.body;
+      console.log('REQ STATUS: '+request.body.status)
       if (ticket) {
         Object.assign(ticket, updateData);
         response.send(JSON.stringify(tickets));
